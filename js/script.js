@@ -71,11 +71,11 @@ $(document).ready(function () {
   var html = $('html');
 
   // Check saved preference
-  var savedTheme = localStorage.getItem('kn-theme');
-  if (savedTheme === 'dark') {
-    html.addClass('dark');
-  } else {
+   var savedTheme = localStorage.getItem('kn-theme');
+  if (savedTheme === 'light') {
     html.removeClass('dark');
+  } else {
+    html.addClass('dark');
   }
 
   themeToggle.on('click', function () {
