@@ -70,8 +70,8 @@ $(document).ready(function () {
   var themeToggle = $('#theme-toggle');
   var html = $('html');
 
-  // Check saved preference
-   var savedTheme = localStorage.getItem('kn-theme');
+  // Check saved preference — default to dark on first visit
+  var savedTheme = localStorage.getItem('kn-theme');
   if (savedTheme === 'light') {
     html.removeClass('dark');
   } else {
@@ -124,8 +124,7 @@ $(document).ready(function () {
 
       // Close mobile menu if open
       if ($('#mobile-menu').hasClass('open')) {
-        $('#mobile-menu').removeClass('open');
-        $('#mobile-toggle').removeClass('open');
+        closeMobileMenu();
       }
     }
   });
@@ -158,9 +157,21 @@ $(document).ready(function () {
   /* ==============================================================
      7. MOBILE MENU TOGGLE
      ============================================================== */
+  function closeMobileMenu() {
+    $('#mobile-toggle').removeClass('open');
+    $('#mobile-menu').removeClass('open');
+    $('body').removeClass('menu-open');
+  }
+
   $('#mobile-toggle').on('click', function () {
-    $(this).toggleClass('open');
-    $('#mobile-menu').toggleClass('open');
+    var isOpen = $('#mobile-menu').hasClass('open');
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      $(this).addClass('open');
+      $('#mobile-menu').addClass('open');
+      $('body').addClass('menu-open');
+    }
   });
 
   /* ==============================================================
