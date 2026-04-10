@@ -956,7 +956,7 @@ html:not(.dark) .testimonial-dot.active {
   }
 
   #hero {
-    margin: 0 1rem;
+    margin-top: 1.5rem;
   }
 }
 
