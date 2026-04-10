@@ -389,15 +389,25 @@ html:not(.dark) .section-title {
    8. NAVBAR
    ---------------------------------------------------------------- */
 #navbar {
+  --navbar-height: 5rem;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #navbar.scrolled {
+  --navbar-height: 4rem;
   background: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+header {
+  --navbar-height: 5rem;
+}
+
+header:has(#navbar.scrolled) {
+  --navbar-height: 4rem;
 }
 
 html:not(.dark) #navbar.scrolled {
@@ -442,17 +452,33 @@ html:not(.dark) #navbar.scrolled {
 }
 
 .nav-link-mobile {
+  display: block;
+  text-align: center;
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-primary);
   transition: color 0.3s;
+  padding: 0.25rem 1rem;
 }
 
 .nav-link-mobile:hover {
   color: var(--primary);
 }
 
+html:not(.dark) .nav-link-mobile {
+  color: var(--light-text);
+}
+
+html:not(.dark) .nav-link-mobile:hover {
+  color: var(--primary);
+}
+
 /* Hamburger animation */
+#mobile-toggle .hamburger-line {
+  display: block;
+  border-radius: 2px;
+}
+
 #mobile-toggle.open .hamburger-line:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -466,8 +492,28 @@ html:not(.dark) #navbar.scrolled {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Mobile menu panel */
+#mobile-menu {
+  top: var(--navbar-height, 5rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: calc(100dvh - var(--navbar-height, 5rem));
+}
+
+#mobile-menu > ul {
+  min-height: 100%;
+  padding: 2rem 1.5rem env(safe-area-inset-bottom, 1.5rem);
+  box-sizing: border-box;
+}
+
 #mobile-menu.open {
   transform: translateX(0);
+}
+
+/* Lock body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
 }
 
 /* ----------------------------------------------------------------
@@ -907,6 +953,10 @@ html:not(.dark) .testimonial-dot.active {
 
   #particles-canvas {
     opacity: 0.5;
+  }
+
+  #hero {
+    margin: 0 1rem;
   }
 }
 
